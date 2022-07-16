@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Amiko|Poppins|Work+Sans");
+
+/*colors*/
+.divider {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.col {
+  flex: 1 2 0;
+  width: 50%;
+}
+.col.col-auto {
+  position: relative;
+}
+
+#dividerWrap {
+  flex-basis: 0;
+  flex-grow: 1;
+  //   min-width: 90%;
+}
+.contentDivider {
+  margin: 15px 0 0 0;
+  font-size: 20px;
+  color: #546e7a;
+}
+.contentDivider .dividedText {
+  display: flex;
+  //   width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.contentDivider .dividedText:before,
+.contentDivider .dividedText:after {
+  content: "";
+  border-top: 2px #546e7a solid;
+  margin: 0 20px 0 0;
+  flex: 1 0 20px;
+}
+.contentDivider .dividedText:after {
+  margin: 0 0 0 20px;
+}
