@@ -146,9 +146,6 @@ const Toolbar = (props) => {
         </Grid>
         <Grid item xs={12}>
           <div className={classes.spacer}>
-            <Button className={classes.exportButton} onClick={handleExport}>
-              Export
-            </Button>
             <Button
               color="primary"
               variant="contained"

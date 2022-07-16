@@ -12,7 +12,7 @@ import UserInfo from "./UserView/Index";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import SimpleToolbar from "../../components/Toolbar/SimpleToolbar";
-import SubscriptionsInfo from "./UserView/SubscriptionsInfo";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/slices/users";
 
@@ -88,9 +88,6 @@ const UserShow = (props) => {
                 levels={studentLevels}
                 pointsHistory={pointsHistory}
               />
-            )}
-            {currentTab === "subscriptions" && (
-              <SubscriptionsInfo subscriptions={userSubscriptions} />
             )}
           </Box>
         </Container>

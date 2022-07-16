@@ -29,10 +29,8 @@ import {
 } from "../../../redux/slices/lessons";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import isExist from "helpers/isExist";
 import validateObj from "helpers/validateObj";
 import { serialize } from "object-to-formdata";
-import { getAllLevels } from "../../../redux/slices/levels";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,9 +63,6 @@ const Form = (props) => {
     setOpen(true);
   };
   //useEffect for the reload page
-  useEffect(() => {
-    if (levels.length === 0) dispatch(getAllLevels(""));
-  }, [dispatch]);
 
   useEffect(() => {
     if (lessons.length === 0) dispatch(getAllLessons(""));

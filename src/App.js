@@ -3,28 +3,28 @@ import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { ThemeProvider } from "@material-ui/styles";
 import validate from "validate.js";
-import { AuthProvider } from './contexts/JWTAuthContext';
+import { AuthProvider } from "./contexts/JWTAuthContext";
 import theme from "./theme";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "./assets/scss/index.scss";
-import validators from "./common/validators";
+// import validators from "./common/validators";
 import routes, { RenderRoutes } from "./Routes";
 
 const browserHistory = createBrowserHistory();
 
-validate.validators = {
-  ...validate.validators,
-  ...validators,
-};
+// validate.validators = {
+//   ...validate.validators,
+//   ...validators,
+// };
 
 export default class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
-        <AuthProvider>
-          <RenderRoutes routes={routes}/>
-        </AuthProvider>
+          <AuthProvider>
+            <RenderRoutes routes={routes} />
+          </AuthProvider>
         </Router>
       </ThemeProvider>
     );

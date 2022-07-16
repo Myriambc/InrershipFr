@@ -30,7 +30,6 @@ const PersonForm = (props) => {
       : "",
     onSubmit: (values) => {
       if (isUpdateConv) {
-        // console.log(persons);
         setPersons((prevData) => {
           const newPersons = prevData.map((p, i) => {
             if (p.id === person.id) {

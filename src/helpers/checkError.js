@@ -98,30 +98,3 @@ export const handleBlur = (e, code, index, formik, secondIndex, thirdIndex) => {
     });
   }
 };
-
-// export const handleBlurOnRemove = (item, code, index, formik, secondIndex) => {
-//   if (secondIndex) {
-//     formik.setTouched({
-//       [item + index + code + secondIndex]: false,
-//       ...formik.touched,
-//     });
-//   } else {
-//     formik.setTouched({
-//       [item + index + code]: false,
-//       ...formik.touched,
-//     });
-//   }
-// };
-// } else if (level === "first_level") {
-//   console.log("validation here");
-//   if (touched?.questionBlocks && !touched[item + index + code + Index]) {
-//     return (
-//       error["content"] === "required" &&
-//       touched?.questionBlocks[index]?.[item][Index - 1]?.content
-//     );
-//   } else {
-//     return (
-//       error["content"] === "required" && touched[item + index + code + Index]
-//     );
-//   }
-// }

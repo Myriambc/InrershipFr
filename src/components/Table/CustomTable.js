@@ -99,7 +99,7 @@ const CustomTable = (props) => {
     // keyValue,
   } = props;
   const [selected, setSelected] = useState([]);
-  // console.log(selected);
+
   const handleSelectAll = (event) => {
     let selected;
 
@@ -294,7 +294,7 @@ const CustomTable = (props) => {
 
   const renderType = (item, col) => {
     const value = accessor(item, col.accessor);
-    console.log("value ======================", value);
+
     switch (col.type) {
       case "chip":
         return chipType(col, value);

@@ -1,6 +1,5 @@
 export const validateOnCreate = (values) => {
   const { questionBlocks } = values;
-  // console.log(values);
   let errors = {};
   errors.questionBlocks = [];
   for (let i = 0; i < questionBlocks.length; i++) {
@@ -62,7 +61,6 @@ export const validateOnCreate = (values) => {
                     if (!errors.questionBlocks[i][item][j][key]) {
                       errors.questionBlocks[i][item][j][key] = [];
                     }
-                    // console.log("niv 3 exist");
                     for (
                       let k = 0;
                       k < questionBlocks[i][item][j][key].length;

@@ -25,7 +25,7 @@ const Topbar = (props) => {
     >
       <Toolbar>
         <RouterLink to="/login">
-          <h2 style={{ fontStyle: "oblique", color: "white" }}>EnglishApp</h2>
+          <h2 style={{ fontStyle: "oblique", color: "white" }}>VTL</h2>
         </RouterLink>
       </Toolbar>
     </AppBar>

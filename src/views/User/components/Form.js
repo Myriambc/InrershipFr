@@ -78,8 +78,6 @@ const Form = (props) => {
     setOpen(false);
   };
   function onSubmit(values) {
-    console.log(values);
-    console.log("submitinnnng");
     //CREATE
     if (!id) {
       dispatch(insertUser(values)).then(() => {

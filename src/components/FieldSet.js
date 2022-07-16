@@ -5,11 +5,6 @@ import { useDispatch } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SnackBar from "../components/SnackBar";
 import Delete from "./Action/Delete";
-import {
-  setQuestionBlock,
-  deleteQuestionblock,
-} from "redux/slices/questionBlocks";
-import { deleteQtnBlock } from "../redux/slices/questions";
 import { nanoid } from "nanoid";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,18 +64,6 @@ function FieldSet(props) {
     setOpenDelete(false);
   };
 
-  const onSubmit = () => {
-    const size = Object.keys(obj).length;
-    if (size !== 0) {
-      dispatch(setQuestionBlock({ id, ...obj }));
-      setAlertMessage("question block updated successfully");
-      setAlertSeverity("success");
-    }
-  };
-  const localDelete = () => {
-    dispatch(deleteQtnBlock(id));
-  };
-
   const removeSpeach = () => {
     setPersonsSelected((prevData) =>
       prevData.filter((el, i) => i !== internIndex)
@@ -123,7 +106,6 @@ function FieldSet(props) {
     ]);
     setValues((prevData) => {
       const newValue = data.map((el, indexV) => {
-        // console.log(code);
         if (indexV === index) {
           if (code === 14) {
             el.speeches2.push({
@@ -186,7 +168,6 @@ function FieldSet(props) {
                     variant="contained"
                     color="primary"
                     onClick={() => {
-                      onSubmit();
                       handleClick();
                     }}
                   >
@@ -217,10 +198,8 @@ function FieldSet(props) {
         </Grid>
       </fieldset>
       <Delete
-        otherFunction={localDelete}
         handleDelete={handleDelete}
         open={openDelete}
-        deleteItem={deleteQuestionblock}
         handleClose={handleCloseDelete}
         itemId={id}
         questionId={questionId}

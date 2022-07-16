@@ -3,11 +3,9 @@ import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/styles";
-import { AppBar, Toolbar, Badge, Hidden, IconButton } from "@material-ui/core";
+import { AppBar, Toolbar, Hidden, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { getItemFromStorage } from "../../../../utils/Storage";
 import useAuth from "hooks/useAuth";
 import { useStore } from "contexts/JWTAuthContext";
 
@@ -31,8 +29,8 @@ const Topbar = (props) => {
   const classes = useStyles();
   const [notifications] = useState([]);
 
-  const logOutAdmin = async () => {
-    await logout();
+  const logOutAdmin = () => {
+    logout();
   };
   return (
     <>
@@ -40,7 +38,7 @@ const Topbar = (props) => {
       <AppBar {...rest} className={clsx(classes.root, className)}>
         <Toolbar>
           <RouterLink to="/">
-            <h2 style={{ fontStyle: "oblique", color: "white" }}>EnglishApp</h2>
+            <h2 style={{ fontStyle: "oblique", color: "white" }}>VTL</h2>
           </RouterLink>
           <Hidden>
             <IconButton
@@ -55,17 +53,6 @@ const Topbar = (props) => {
           <div className={classes.flexGrow} />
           {isAuthenticated && (
             <>
-              <Hidden mdDown>
-                <IconButton color="inherit">
-                  <Badge
-                    badgeContent={notifications.length}
-                    color="primary"
-                    variant="dot"
-                  >
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-              </Hidden>
               <IconButton
                 className={classes.signOutButton}
                 color="inherit"

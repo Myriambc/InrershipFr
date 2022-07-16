@@ -20,22 +20,10 @@ const slice = createSlice({
       state.isLoading = false;
     },
     loginSuccess: (state, action) => {
-      //localStorage.setItem("user", action.payload.data.user_id);
-      /*localStorage.setItem("token_type", action.payload.data.token_type);
-      localStorage.setItem("token", action.payload.data.access_token);
-      localStorage.setItem("expires_at", action.payload.data.expires_at);*/
       state.user = action.payload.data;
       state.isLoggedin = true;
       state.isLoading = false;
     },
-    // logoutSuccess: (state, action) => {
-    //   localStorage.removeItem("user");
-    //   localStorage.removeItem("token");
-    //   localStorage.removeItem("token_type");
-    //   localStorage.removeItem("expires_at");
-    //   state.user = [];
-    //   state.isLoggedin = false;
-    // },
   },
 });
 export default slice.reducer;
@@ -53,15 +41,3 @@ export const login = (data) => async (dispatch) => {
     return console.log(e.message);
   }
 };
-
-// export const logout = () => async (dispatch) => {
-//   try {
-//     const res = await api.get("/auth/logout/");
-//     dispatch(logoutSuccess());
-//     window.location = "/login";
-//   } catch (e) {
-//     dispatch(logoutSuccess());
-//     window.location = "/login";
-//     return console.error(e.message);
-//   }
-// };

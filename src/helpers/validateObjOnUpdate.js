@@ -3,8 +3,7 @@ import IsBoolean from "./isBoolean";
 const validateOnUpdate = (obj, code) => {
   let bool = true;
   var size = Object.keys(obj).length;
-  // console.log(obj);
-  // console.log(code);
+
   switch (code) {
     case 1:
       if (

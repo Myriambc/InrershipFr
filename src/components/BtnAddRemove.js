@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Box } from "@material-ui/core";
 import validateOnUpdate from "helpers/validateObjOnUpdate";
-import { insertQuestionBlock } from "../redux/slices/questionBlocks";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneQuestion } from "redux/slices/questions";
 
 function BtnAddRemove(props) {
   const dispatch = useDispatch();
@@ -28,11 +26,11 @@ function BtnAddRemove(props) {
       questionId: questionId,
       order: question?.questionBlocks?.length + 1,
     };
-    dispatch(insertQuestionBlock(newObj)).then(() => {
-      dispatch(getOneQuestion(questionId));
-      setTypes((types) => types.filter((el) => el.id !== id));
-      setValues((values) => values.filter((el, i) => i !== index));
-    });
+    // dispatch(insertQuestionBlock(newObj)).then(() => {
+    //   dispatch(getOneQuestion(questionId));
+    //   setTypes((types) => types.filter((el) => el.id !== id));
+    //   setValues((values) => values.filter((el, i) => i !== index));
+    // });
   };
   return (
     <div style={{ display: "flex" }}>

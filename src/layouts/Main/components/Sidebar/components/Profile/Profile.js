@@ -47,7 +47,7 @@ const Profile = (props) => {
         <br />
       )}
       {profil ? (
-        <Typography variant="body2">{(user && user.email) || ""}</Typography>
+        <Typography variant="body2">{(user && user.name) || ""}</Typography>
       ) : (
         <br />
       )}

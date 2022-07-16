@@ -5,15 +5,8 @@ import Table from "../../components/Table/Table";
 import Collapse from "@material-ui/core/Collapse";
 import Columns from "../../components/Columns";
 import Filter from "../../components/Filter/Filter";
-import {
-  getAllLessons,
-  deleteOneLesson,
-  getGroupedLessons,
-} from "../../redux/slices/lessons";
-import { getAllLevels } from "../../redux/slices/levels";
+import { getAllLessons, deleteOneLesson } from "../../redux/slices/lessons";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllExercices } from "../../redux/slices/exercices";
-import { getAllQuestions } from "../../redux/slices/questions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,11 +69,9 @@ const fieldSearchable = ["id"];
 
 const LessonList = () => {
   const { lessons, loading } = useSelector((state) => state.lessons);
-  const { levels } = useSelector((state) => state.levels);
 
   const fieldFilterable = [
     { name: "title", label: "title", type: "text" },
-    { name: "levelId", label: "level", type: "dropdown", options: levels },
     { name: "subtitle", label: "subtitle", type: "text" },
     { name: "order", label: "order", type: "number" },
     { name: "createdAt", label: "Created At", type: "dateRange" },
@@ -103,10 +94,6 @@ const LessonList = () => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getAllLevels(""));
-  }, [dispatch]);
-
   const toggleFilters = () => {
     setFiltersOpen(!filtersOpen);
   };
@@ -125,12 +112,6 @@ const LessonList = () => {
   };
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(event.target.value);
-  };
-
-  const dispatchOnDelete = () => {
-    dispatch(getAllExercices(""));
-    dispatch(getAllQuestions(""));
-    dispatch(getGroupedLessons("?grouped=true&sort=-order,title"));
   };
 
   return (
@@ -167,7 +148,6 @@ const LessonList = () => {
           rowsPerPage={rowsPerPage}
           handleRowsPerPageChange={handleRowsPerPageChange}
           pageLink={"/contents/lessons"}
-          otherFunction={dispatchOnDelete}
         />
       </div>
     </div>

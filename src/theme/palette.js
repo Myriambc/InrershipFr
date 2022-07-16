@@ -7,20 +7,12 @@ export default {
   black,
   white,
   primary: {
-    // contrastText: white,
-    // dark: colors.indigo[900],
-    // main: colors.indigo[500],
-    // light: colors.indigo[100],
     contrastText: white,
     dark: "#007ee2",
     main: "#0093e2",
     light: "#009ee2",
   },
   secondary: {
-    // contrastText: white,
-    // dark: colors.blue[900],
-    // main: colors.blue["A400"],
-    // light: colors.blue["A400"],
     contrastText: white,
     dark: "#FD7F44",
     main: "#FD9D59",
@@ -35,7 +27,7 @@ export default {
   info: {
     contrastText: white,
     dark: "#0d47a1",
-    main: '#1e88e5',
+    main: "#1e88e5",
     light: "#42a5f5",
   },
   warning: {
@@ -46,7 +38,7 @@ export default {
   },
   error: {
     contrastText: white,
-    dark:"#b71c1c",
+    dark: "#b71c1c",
     main: "#e53935",
     light: "#ef5350",
   },

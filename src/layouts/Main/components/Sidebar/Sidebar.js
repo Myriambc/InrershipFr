@@ -80,11 +80,6 @@ const Sidebar = (props) => {
   const classes = useStyles();
   const pages = [
     {
-      title: "Dashboard",
-      href: "/dashboard",
-      icon: <DashboardIcon />,
-    },
-    {
       title: "Admins",
       icon: <PeopleIcon />,
       children: [
@@ -95,65 +90,13 @@ const Sidebar = (props) => {
         },
       ],
     },
-
-    // {
-    //   title: "Statistics",
-    //   icon: <BarChartIcon />,
-    //   children: [],
-    // },
     {
       title: "Contents",
       icon: <FindInPageIcon />,
       children: [
         {
-          title: "Languages",
-          href: "/contents/languages",
-        },
-        {
-          title: "Courses",
-          href: "/contents/courses",
-        },
-        {
-          title: "Levels",
-          href: "/contents/levels",
-        },
-        {
           title: "Lessons",
           href: "/contents/lessons",
-        },
-        {
-          title: "Exercises Types",
-          href: "/contents/exercises-types",
-        },
-        {
-          title: "Exercises",
-          href: "/contents/exercises",
-        },
-        {
-          title: "Questions",
-          href: "/contents/questions",
-        },
-      ],
-    },
-    {
-      title: "Orders",
-      icon: <ListAltIcon />,
-      children: [
-        {
-          title: "Levels",
-          href: "/orders/levels",
-        },
-        {
-          title: "Lessons",
-          href: "/orders/lessons",
-        },
-        {
-          title: "Exercises",
-          href: "/orders/exercises",
-        },
-        {
-          title: "Questions",
-          href: "/orders/questions",
         },
       ],
     },
@@ -162,10 +105,6 @@ const Sidebar = (props) => {
       title: "Settings",
       icon: <SettingsIcon />,
       children: [
-        {
-          title: "Admin Users",
-          href: "/settings/admin-users",
-        },
         {
           title: "Admin Roles",
           href: "/settings/roles",

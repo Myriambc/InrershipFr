@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import {makeStyles} from '@material-ui/styles';
-import {Typography, Link} from '@material-ui/core';
-import Moment from 'moment';
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/styles";
+import { Typography, Link } from "@material-ui/core";
+import Moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,25 +12,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Footer = (props) => {
-  const {className, ...rest} = props;
+  const { className, ...rest } = props;
 
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Typography variant="body1">
-        &copy;{' '}
-        <Link
-          component="a"
-          href="https://takiacademy.com/"
-          target="_blank"
-        >
-          Takiacademy
+        &copy;{" "}
+        <Link component="a" href="#" target="_blank">
+          VTL
         </Link>
-        . {Moment().format('YYYY')}
+        . {Moment().format("YYYY")}
       </Typography>
     </div>
   );

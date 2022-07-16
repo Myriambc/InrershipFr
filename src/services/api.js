@@ -27,8 +27,6 @@ api.interceptors.request.use(
 export const getData = (url, filter) => api.get(`/${url}${filter}`);
 export const getOne = (url, id) => api.get(`/${url}/${id}`);
 export const updateOne = (url, id, item) => api.put(`/${url}/${id}`, item);
-export const updateOrder = (orders, item) =>
-  api.put(`/${item}/update-order`, orders);
 export const createOne = (url, data) => api.post(`/${url}`, data);
 export const deleteOne = (url, id) => api.delete(`/${url}/${id}`);
 

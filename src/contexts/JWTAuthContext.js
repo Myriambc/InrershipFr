@@ -129,7 +129,7 @@ export const AuthProvider = ({ children }) => {
         const token = window.localStorage.getItem("token");
         if (token) {
           const response = await getData(`users/me`, "");
-          console.log(response);
+
           dispatch({
             type: "INITIALISE",
             payload: {

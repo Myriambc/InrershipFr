@@ -1,11 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  getData,
-  createOne,
-  deleteOne,
-  updateOne,
-  updateOrder,
-} from "../../services/api";
+import { getData, createOne, deleteOne, updateOne } from "../../services/api";
 import { serialize } from "object-to-formdata";
 
 export const getAllLessons = createAsyncThunk(
@@ -73,18 +67,7 @@ export const deleteOneLesson = createAsyncThunk(
     }
   }
 );
-//update lesson orders
-export const updateLessonOrder = createAsyncThunk(
-  "level/updateLevelOrder",
-  async (orders, { rejectWithValue, thunkAPI }) => {
-    try {
-      const { data } = await updateOrder({ orders }, "lessons");
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response);
-    }
-  }
-);
+
 const initialState = {
   lessons: [],
   lessonsGrouped: [],

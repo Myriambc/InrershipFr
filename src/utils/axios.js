@@ -1,6 +1,4 @@
 import axios from "axios";
-// const apiUrl = process.env.REACT_APP_API_URL;
-console.log("fggt", process.env.REACT_APP_FRONT_USERS_URL);
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_FRONT_USERS_URL,
 });

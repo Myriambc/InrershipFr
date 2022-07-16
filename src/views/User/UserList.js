@@ -78,7 +78,6 @@ const fieldFilterable = [
 ];
 
 const UserList = () => {
-  console.log("it work");
   const { users, loading } = useSelector((state) => state.users);
 
   const [search, searchChange] = useState("");
@@ -126,7 +125,7 @@ const UserList = () => {
         toggleFilters={toggleFilters}
         toggleColumns={toggleColumns}
         searchChange={searchChange}
-        pageLink={"/users"}
+        pageLink={"/admins"}
         searchMessage={"Search (ID, Name)"}
       />
       <div className={classes.content}>
