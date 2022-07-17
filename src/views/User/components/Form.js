@@ -81,9 +81,9 @@ const Form = (props) => {
     //CREATE
     if (!id) {
       dispatch(insertUser(values)).then(() => {
-        history.push("/users");
+        history.push("/admins");
       });
-      setAlertMessage("User Created Successfully");
+      setAlertMessage("admin Created Successfully");
       setAlertSeverity("success");
     } else {
       //UPDATE

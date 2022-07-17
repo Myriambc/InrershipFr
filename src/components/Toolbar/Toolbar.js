@@ -96,7 +96,9 @@ const Toolbar = (props) => {
   const route = window.location.pathname + "/create";
   const name = title
     ? title.toUpperCase()
-    : pageLink.split("/")[1].toUpperCase();
+    : pageLink.split("/").length == 2
+    ? pageLink.split("/")[1].toUpperCase()
+    : pageLink.split("/")[2].toUpperCase();
   const classes = useStyles();
   const handleSearch = (e) => {
     searchChange(e.target.value);

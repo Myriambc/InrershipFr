@@ -13,7 +13,7 @@ export { default as DivisionList } from "./Level/LevelList";
 export { default as DivisionCreate } from "./Level/LevelCreate";
 export { default as DivisionEdit } from "./Level/LevelEdit";
 
-export { default as LessonList } from "./Lesson/LessonList";
-export { default as LessonCreate } from "./Lesson/LessonCreate";
-export { default as LessonEdit } from "./Lesson/LessonEdit";
-export { default as LessonShow } from "./Lesson/LessonShow";
+export { default as LessonList } from "./Saison/LessonList";
+export { default as LessonCreate } from "./Saison/LessonCreate";
+export { default as LessonEdit } from "./Saison/LessonEdit";
+export { default as LessonShow } from "./Saison/LessonShow";

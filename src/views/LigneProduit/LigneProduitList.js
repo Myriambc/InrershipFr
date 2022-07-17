@@ -5,7 +5,10 @@ import Table from "../../components/Table/Table";
 import Collapse from "@material-ui/core/Collapse";
 import Columns from "../../components/Columns";
 import Filter from "../../components/Filter/Filter";
-import { getAllLessons, deleteOneLesson } from "../../redux/slices/lessons";
+import {
+  getAllLigneProduits,
+  deleteOneLigneProduit,
+} from "../../redux/slices/ligneProduit";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,25 +29,7 @@ const columnsList = [
     show: true,
     sortable: false,
   },
-  { accessor: "title", label: "Title", width: "14%", show: true },
-  { accessor: "subtitle", label: "Subtitle", width: "14%", show: true },
-  { accessor: "time", label: "Time", width: "14%", show: true },
-  {
-    accessor: "levelId.title",
-    name: "level",
-    label: "Level",
-    width: "14%",
-    show: true,
-    sortable: false,
-  },
-  {
-    accessor: "order",
-    label: "Order",
-    width: "14%",
-    show: true,
-    sortable: false,
-  },
-
+  { accessor: "label", label: "Label", width: "20%", show: true },
   {
     accessor: "createdAt",
     name: "createdAt",
@@ -67,13 +52,13 @@ const columnsList = [
 
 const fieldSearchable = ["id"];
 
-const LessonList = () => {
-  const { lessons, loading } = useSelector((state) => state.lessons);
+const LigneProduitList = () => {
+  const { ligneProduits, loading } = useSelector(
+    (state) => state.ligneProduits
+  );
 
   const fieldFilterable = [
-    { name: "title", label: "title", type: "text" },
-    { name: "subtitle", label: "subtitle", type: "text" },
-    { name: "order", label: "order", type: "number" },
+    { name: "label", label: "label", type: "text" },
     { name: "createdAt", label: "Created At", type: "dateRange" },
     { name: "updatedAt", label: "Updated At", type: "dateRange" },
   ];
@@ -89,8 +74,8 @@ const LessonList = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (lessons?.length === 0) {
-      dispatch(getAllLessons(""));
+    if (ligneProduits?.length === 0) {
+      dispatch(getAllLigneProduits(""));
     }
   }, [dispatch]);
 
@@ -120,7 +105,7 @@ const LessonList = () => {
         toggleFilters={toggleFilters}
         toggleColumns={toggleColumns}
         searchChange={searchChange}
-        pageLink={"/contents/lessons"}
+        pageLink={"/contents/lignes-produit"}
         searchMessage={"Search (ID )"}
       />
       <div className={classes.content}>
@@ -132,14 +117,14 @@ const LessonList = () => {
             fields={fieldFilterable}
             values={filters}
             filtersChange={filtersChange}
-            handelFilter={getAllLessons}
+            handelFilter={getAllLigneProduits}
           />
         </Collapse>
         <Table
-          deleteItem={deleteOneLesson}
+          deleteItem={deleteOneLigneProduit}
           loading={loading}
           columns={columns}
-          data={lessons}
+          data={ligneProduits}
           handleSortChange={handleSortChange}
           sort={sort}
           handlePageChange={handlePageChange}
@@ -147,11 +132,11 @@ const LessonList = () => {
           tableService={""}
           rowsPerPage={rowsPerPage}
           handleRowsPerPageChange={handleRowsPerPageChange}
-          pageLink={"/contents/lessons"}
+          pageLink={"/contents/lignes-produit"}
         />
       </div>
     </div>
   );
 };
 
-export default LessonList;
+export default LigneProduitList;

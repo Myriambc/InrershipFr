@@ -95,8 +95,20 @@ const Sidebar = (props) => {
       icon: <FindInPageIcon />,
       children: [
         {
-          title: "Lessons",
-          href: "/contents/lessons",
+          title: "Saisons",
+          href: "/contents/saisons",
+        },
+        {
+          title: "Phases",
+          href: "/contents/phases",
+        },
+        {
+          title: "Familles",
+          href: "/contents/familles",
+        },
+        {
+          title: "Lignes-Produit",
+          href: "/contents/lignes-produit",
         },
       ],
     },

@@ -90,44 +90,84 @@ const routes = [
         exact: true,
         path: "/admins/create",
         component: lazy(() => import("./views/User/UserCreate")),
-        title: "TA|Students-create",
+        title: "VTL|Admins-create",
       },
       {
         exact: true,
         path: "/admins/edit/:id",
         component: lazy(() => import("./views/User/UserEdit")),
-        title: "TA|Students-edit",
+        title: "VTL|Students-edit",
       },
       {
         exact: true,
         path: "/admins/view/:id",
         component: lazy(() => import("./views/User/UserShow")),
-        title: "TA|Students-view",
+        title: "VTL|Students-view",
       },
-      //lessons
+      //saisons
       {
         exact: true,
-        path: "/contents/lessons",
-        component: lazy(() => import("./views/Lesson/LessonList")),
-        title: "TA|Contents-lessons",
-      },
-      {
-        exact: true,
-        path: "/contents/lessons/create",
-        component: lazy(() => import("./views/Lesson/LessonCreate")),
-        title: "TA|Contents-lessons-create",
+        path: "/contents/saisons",
+        component: lazy(() => import("./views/Saison/LessonList")),
+        title: "VTL|Contents-saisons",
       },
       {
         exact: true,
-        path: "/contents/lessons/edit/:id",
-        component: lazy(() => import("./views/Lesson/LessonEdit")),
-        title: "TA|Contents-lessons-edit",
+        path: "/contents/saisons/create",
+        component: lazy(() => import("./views/Saison/LessonCreate")),
+        title: "VTL|Contents-lessons-create",
+      },
+      // {
+      //   exact: true,
+      //   path: "/contents/lessons/edit/:id",
+      //   component: lazy(() => import("./views/Saison/LessonEdit")),
+      //   title: "VTL|Contents-lessons-edit",
+      // },
+      // {
+      //   exact: true,
+      //   path: "/contents/lessons/view/:id",
+      //   component: lazy(() => import("./views/Saison/LessonShow")),
+      //   title: "VTL|Contents-lessons-view",
+      // },
+      //phases
+      {
+        exact: true,
+        path: "/contents/phases",
+        component: lazy(() => import("./views/Phase/PhaseList")),
+        title: "VTL|Contents-phases",
       },
       {
         exact: true,
-        path: "/contents/lessons/view/:id",
-        component: lazy(() => import("./views/Lesson/LessonShow")),
-        title: "TA|Contents-lessons-view",
+        path: "/contents/phases/create",
+        component: lazy(() => import("./views/Phase/PhaseCreate")),
+        title: "VTL|Contents-phases-create",
+      },
+      {
+        exact: true,
+        path: "/contents/familles",
+        component: lazy(() => import("./views/Famille/FamilleList")),
+        title: "VTL|Contents-phases",
+      },
+      {
+        exact: true,
+        path: "/contents/familles/create",
+        component: lazy(() => import("./views/Famille/FamilleCreate")),
+        title: "VTL|Contents-phases-create",
+      },
+      //ligneProduit
+      {
+        exact: true,
+        path: "/contents/lignes-produit",
+        component: lazy(() => import("./views/LigneProduit/LigneProduitList")),
+        title: "VTL|Contents-ligneProduit",
+      },
+      {
+        exact: true,
+        path: "/contents/lignes-produit/create",
+        component: lazy(() =>
+          import("./views/LigneProduit/LigneProduitCreate")
+        ),
+        title: "VTL|Contents-phases-lignes-produit",
       },
     ],
   },
@@ -137,7 +177,7 @@ const routes = [
     routes: [
       {
         component: () => <Redirect to="/404" />,
-        title: "VTL |Not found",
+        title: "VTL|Not found",
       },
     ],
   },
