@@ -110,6 +110,14 @@ const Sidebar = (props) => {
           title: "Lignes-Produit",
           href: "/contents/lignes-produit",
         },
+        {
+          title: "Clients",
+          href: "/contents/clients",
+        },
+        {
+          title: "Modele",
+          href: "/contents/modeles",
+        },
       ],
     },
 

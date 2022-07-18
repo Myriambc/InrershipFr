@@ -6,6 +6,8 @@ import saisons from "./slices/saison";
 import phases from "./slices/phase";
 import familles from "./slices/famille";
 import ligneProduits from "./slices/ligneProduit";
+import clients from "./slices/client";
+import modeles from "./slices/modele";
 
 export default configureStore({
   reducer: {
@@ -15,6 +17,8 @@ export default configureStore({
     phases,
     familles,
     ligneProduits,
+    clients,
+    modeles,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

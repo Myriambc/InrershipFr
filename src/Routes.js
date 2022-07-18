@@ -169,6 +169,32 @@ const routes = [
         ),
         title: "VTL|Contents-phases-lignes-produit",
       },
+      //modele
+      {
+        exact: true,
+        path: "/contents/modeles",
+        component: lazy(() => import("./views/Modele/ModeleList")),
+        title: "VTL|Contents-Modeles",
+      },
+      {
+        exact: true,
+        path: "/contents/modeles/create",
+        component: lazy(() => import("./views/Modele/ModeleCreate")),
+        title: "VTL| Contents-Modeles",
+      },
+      // client
+      {
+        exact: true,
+        path: "/contents/clients",
+        component: lazy(() => import("./views/Client/ClientList")),
+        title: "VTL|Contents-Modele",
+      },
+      {
+        exact: true,
+        path: "/contents/clients/create",
+        component: lazy(() => import("./views/Client/ClientCreate")),
+        title: "VTL|Contents-Modele",
+      },
     ],
   },
   {
