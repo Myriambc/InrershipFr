@@ -20,11 +20,7 @@ export const updateOneLigneProduit = createAsyncThunk(
   async (data, { rejectWithValue, thunkAPI }) => {
     const { id, ...ligneProduit } = data;
     try {
-      const { data } = await updateOne(
-        "lignes-produit",
-        id,
-        serialize(ligneProduit, { indices: true })
-      );
+      const { data } = await updateOne("lignes-produit", id, ligneProduit);
       return data;
     } catch (error) {
       return rejectWithValue(error.response);

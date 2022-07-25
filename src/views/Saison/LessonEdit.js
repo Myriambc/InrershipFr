@@ -21,8 +21,8 @@ const LessonEdit = (props) => {
     <div className={classes.root}>
       <SimpleToolbar
         Link={Link}
-        pageLink={"/contents/lessons"}
-        title={"Lessons"}
+        pageLink={"/contents/saisons"}
+        title={"saisons"}
       />
       <div className={classes.content}>
         <Form edit={true} />

@@ -151,7 +151,7 @@ const UserList = () => {
           tableService={""}
           rowsPerPage={rowsPerPage}
           handleRowsPerPageChange={handleRowsPerPageChange}
-          pageLink={"/users"}
+          pageLink={"/admins"}
         />
       </div>
     </div>

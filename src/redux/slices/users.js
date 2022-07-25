@@ -1,11 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createOne, getData, getOne } from "../../services/api";
+import { createOne, getData, getOne, updateOne } from "../../services/api";
 
 export const getAllUsers = createAsyncThunk(
   "users/getUsers",
   async (filter, { getState, rejectWithValue }) => {
     try {
       const { data } = await getData("users", filter);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+// update user
+export const updateOneUser = createAsyncThunk(
+  "saison/updateUser",
+  async (data, { rejectWithValue, thunkAPI }) => {
+    const { id, ...user } = data;
+    try {
+      const { data } = await updateOne("users", id, user);
       return data;
     } catch (error) {
       return rejectWithValue(error.response);

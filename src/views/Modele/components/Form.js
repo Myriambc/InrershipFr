@@ -27,13 +27,18 @@ import Button from "@material-ui/core/Button";
 import SnackBar from "../../../components/SnackBar";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllModeles, insertModele } from "redux/slices/modele";
+import {
+  getAllModeles,
+  insertModele,
+  updateOneModele,
+} from "redux/slices/modele";
 import e from "cors";
 import { getAllClients } from "redux/slices/client";
 import { getAllSaisons } from "redux/slices/saison";
 import { getAllPhases } from "redux/slices/phase";
 import { getAllLigneProduits } from "redux/slices/ligneProduit";
 import { getAllFamilles } from "redux/slices/famille";
+import validateObj from "helpers/validateObj";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,6 +88,7 @@ const Form = (props) => {
   };
   function onSubmit(values) {
     values.deliveryDate = new Date(values.deliveryDate);
+    console.log(values);
     //CREATE
     if (!id) {
       dispatch(insertModele(values)).then(() => {
@@ -92,21 +98,20 @@ const Form = (props) => {
       setAlertMessage("modele Created Successfully");
       setAlertSeverity("success");
     } else {
-      //UPDATE
-      // const validValues = validateObj(lesson, values);
-      // if (Object.keys(validValues).length === 0) {
-      //   setAlertMessage("Nothing To Update");
-      //   setAlertSeverity("error");
-      //   return;
-      // } else {
-      //   dispatch(updateOneLesson({ id, ...validValues })).then(() => {
-      //     dispatch(getAllLessons(""));
-      //     dispatch(getGroupedLessons("?grouped=true&sort=-order,title"));
-      //     history.push("/contents/lessons");
-      //   });
-      //   setAlertMessage("Lesson Updated Successfully");
-      //   setAlertSeverity("success");
-      // }
+      // UPDATE
+      const validValues = validateObj(modele, values);
+      if (Object.keys(validValues).length === 0) {
+        setAlertMessage("Nothing To Update");
+        setAlertSeverity("error");
+        return;
+      } else {
+        dispatch(updateOneModele({ id, ...validValues })).then(() => {
+          dispatch(getAllModeles(""));
+          history.push("/contents/modeles");
+        });
+        setAlertMessage("Modele Updated Successfully");
+        setAlertSeverity("success");
+      }
     }
   }
   const { clients } = useSelector((state) => state.clients);
@@ -142,13 +147,14 @@ const Form = (props) => {
   const formik = useFormik({
     initialValues: {
       refArticle: id ? modele?.refArticle : "",
-      client: id ? modele?.client._id : "",
-      saison: id ? modele?.saison._id : "",
-      famille: id ? modele?.famille._id : "",
-      phase: id ? modele?.phase._id : "",
-      ligneProduit: id ? modele?.ligneProduit._id : "",
+      client: id ? modele?.client?._id : "",
+      saison: id ? modele?.saison?._id : "",
+      famille: id ? modele?.famille?._id : "",
+      phase: id ? modele?.phase?._id : "",
+      ligneProduit: id ? modele?.ligneProduit?._id : "",
       colorCode: id ? modele?.colorCode : "",
       deliveryDate: id ? modele?.deliveryDate : new Date(),
+      image: id ? modele?.image : "",
     },
     validationSchema: !id
       ? Yup.object().shape({
@@ -376,6 +382,18 @@ const Form = (props) => {
                         onBlur={formik.handleBlur}
                       />
                     </FormControl>
+                  </Grid>
+                  <Grid item md={4} sm={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      name="image"
+                      onBlur={formik.handleBlur}
+                      onChange={(e) => {
+                        formik.setFieldValue("image", e.target.files[0]);
+                      }}
+                      type="file"
+                      variant="outlined"
+                    />
                   </Grid>
                 </Grid>
               </CardContent>

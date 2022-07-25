@@ -36,7 +36,10 @@ export const insertModele = createAsyncThunk(
   "modeles/insertModele",
   async (modele, { rejectWithValue }) => {
     try {
-      const { data } = await createOne("modeles", modele);
+      const { data } = await createOne(
+        "modeles",
+        serialize(modele, { indices: true })
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.response);

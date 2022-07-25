@@ -20,7 +20,11 @@ const UserEdit = (props) => {
 
   return (
     <div className={classes.root}>
-      <SimpleToolbar Link={Link} pageLink={"/admins"} title={"Edit Admin"} />
+      <SimpleToolbar
+        Link={Link}
+        pageLink={"/contents/modeles"}
+        title={"Edit Modele"}
+      />
       <div className={classes.content}>
         <Form edit={true} />
       </div>

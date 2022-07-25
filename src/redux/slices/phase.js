@@ -20,11 +20,7 @@ export const updateOnePhase = createAsyncThunk(
   async (data, { rejectWithValue, thunkAPI }) => {
     const { id, ...phase } = data;
     try {
-      const { data } = await updateOne(
-        "phases",
-        id,
-        serialize(phase, { indices: true })
-      );
+      const { data } = await updateOne("phases", id, phase);
       return data;
     } catch (error) {
       return rejectWithValue(error.response);

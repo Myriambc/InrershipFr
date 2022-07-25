@@ -64,7 +64,7 @@ const UserShow = (props) => {
 
   return (
     <div>
-      <SimpleToolbar Link={Link} pageLink={"/users"} title={"User Details"} />
+      <SimpleToolbar Link={Link} pageLink={"/admins"} title={"User Details"} />
       <Page className={classes.root} title="User Details">
         <Container maxWidth={false}>
           <Box mt={4}>

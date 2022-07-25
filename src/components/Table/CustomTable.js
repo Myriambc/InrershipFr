@@ -26,6 +26,8 @@ import Label from "../Label";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Tooltip from "@material-ui/core/Tooltip";
 import { MenuBook } from "@material-ui/icons";
+import axios from "axios";
+import api, { getImage } from "services/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -181,6 +183,9 @@ const CustomTable = (props) => {
       : "* * * * *";
     return chipType(col, v);
   };
+  const imageType = (col, value) => {
+    return <img src={`http://localhost:8000/${value}`} />;
+  };
   const simpleListType = (col, value) => {
     return (
       <List>
@@ -313,6 +318,8 @@ const CustomTable = (props) => {
         return pointsType(col, value);
       case "subjectType":
         return subjectType(col, value);
+      case "image":
+        return imageType(col, value);
       default:
         return value;
     }

@@ -5,7 +5,7 @@ import Table from "../../components/Table/Table";
 import Collapse from "@material-ui/core/Collapse";
 import Columns from "../../components/Columns";
 import Filter from "../../components/Filter/Filter";
-import { getAllModeles } from "../../redux/slices/modele";
+import { deleteOneModele, getAllModeles } from "../../redux/slices/modele";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,62 +19,62 @@ const useStyles = makeStyles((theme) => ({
 
 const columnsList = [
   {
-    accessor: "_id",
-    name: "id",
-    label: "Id",
+    accessor: "image",
+    name: "image",
+    label: "image",
     width: "7%",
     show: true,
-    sortable: true,
-    type: "modeleSwitch",
+    sortable: false,
+    type: "image",
   },
 
   {
     accessor: "refArticle",
     name: "refArticle",
     label: "ref article",
-    width: "20%",
+    width: "7%",
     show: true,
     sortable: true,
   },
   {
     accessor: "client.label",
     label: "client",
-    width: "20%",
+    width: "7%",
     show: true,
     type: "fieldValue",
   },
   {
     accessor: "saison.label",
     label: "saison",
-    width: "20%",
+    width: "7%",
     show: true,
     type: "fieldValue",
   },
   {
     accessor: "famille.label",
     label: "famille",
-    width: "20%",
+    width: "7%",
     show: true,
     type: "fieldValue",
   },
   {
     accessor: "phase.label",
     label: "phase",
-    width: "20%",
+    width: "7%",
     show: true,
     type: "fieldValue",
   },
   {
     accessor: "ligneProduit.label",
     label: "ligne prdouit",
-    width: "20%",
+    width: "7%",
     show: true,
     type: "fieldValue",
   },
   {
     accessor: "colorCode",
     label: "color",
-    width: "20%",
+    width: "7%",
     show: true,
     type: "fieldValue",
   },
@@ -83,7 +83,7 @@ const columnsList = [
     accessor: "deliveryDate",
     name: "deliveryDate",
     label: "Delivery Date",
-    width: "20%",
+    width: "7%",
     show: true,
     sortable: true,
     type: "date",
@@ -92,8 +92,8 @@ const columnsList = [
     accessor: "createdAt",
     name: "createdAt",
     label: "Created At",
-    width: "20%",
-    show: true,
+    width: "7%",
+    show: false,
     sortable: true,
     type: "date",
   },
@@ -101,8 +101,8 @@ const columnsList = [
     accessor: "updatedAt",
     name: "updatedAt",
     label: "Updated At",
-    width: "20%",
-    show: true,
+    width: "7%",
+    show: false,
     sortable: true,
     type: "date",
   },
@@ -182,6 +182,7 @@ const ModeleList = () => {
           />
         </Collapse>
         <Table
+          deleteItem={deleteOneModele}
           loading={loading}
           columns={columns}
           data={modeles}
@@ -192,7 +193,7 @@ const ModeleList = () => {
           tableService={""}
           rowsPerPage={rowsPerPage}
           handleRowsPerPageChange={handleRowsPerPageChange}
-          pageLink={"/modeles"}
+          pageLink={"/contents/modeles"}
         />
       </div>
     </div>

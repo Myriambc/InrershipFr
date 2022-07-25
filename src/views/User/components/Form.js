@@ -28,8 +28,9 @@ import Button from "@material-ui/core/Button";
 import SnackBar from "../../../components/SnackBar";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { insertUser } from "redux/slices/users";
+import { insertUser, updateOneUser } from "redux/slices/users";
 import e from "cors";
+import validateObj from "helpers/validateObj";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,20 +88,25 @@ const Form = (props) => {
       setAlertSeverity("success");
     } else {
       //UPDATE
-      // const validValues = validateObj(lesson, values);
-      // if (Object.keys(validValues).length === 0) {
-      //   setAlertMessage("Nothing To Update");
-      //   setAlertSeverity("error");
-      //   return;
-      // } else {
-      //   dispatch(updateOneLesson({ id, ...validValues })).then(() => {
-      //     dispatch(getAllLessons(""));
-      //     dispatch(getGroupedLessons("?grouped=true&sort=-order,title"));
-      //     history.push("/contents/lessons");
-      //   });
-      //   setAlertMessage("Lesson Updated Successfully");
-      //   setAlertSeverity("success");
-      // }
+      const validValues = validateObj(user, values);
+      if (Object.keys(validValues).length === 0) {
+        setAlertMessage("Nothing To Update");
+        setAlertSeverity("error");
+        return;
+      } else {
+        dispatch(
+          updateOneUser({
+            id,
+            name: validValues.name,
+            email: validValues.email,
+          })
+        ).then(() => {
+          dispatch();
+          history.push("/contents/admins");
+        });
+        setAlertMessage("Lesson Updated Successfully");
+        setAlertSeverity("success");
+      }
     }
   }
   const formik = useFormik({

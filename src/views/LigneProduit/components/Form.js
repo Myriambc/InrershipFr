@@ -94,7 +94,7 @@ const Form = (props) => {
       } else {
         dispatch(updateOneLigneProduit({ id, ...validValues })).then(() => {
           dispatch(getAllLigneProduits(""));
-          history.push("/contents/ligneProduits");
+          history.push("/contents/lignes-produit");
         });
         setAlertMessage("LigneProduit Updated Successfully");
         setAlertSeverity("success");
