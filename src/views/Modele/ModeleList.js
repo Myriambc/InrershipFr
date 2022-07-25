@@ -86,7 +86,7 @@ const columnsList = [
     width: "20%",
     show: true,
     sortable: true,
-    type: "da te",
+    type: "date",
   },
   {
     accessor: "createdAt",
@@ -166,7 +166,7 @@ const ModeleList = () => {
         toggleFilters={toggleFilters}
         toggleColumns={toggleColumns}
         searchChange={searchChange}
-        pageLink={"/modeles"}
+        pageLink={"/contents/modeles"}
         searchMessage={"Search (ID, Name)"}
       />
       <div className={classes.content}>

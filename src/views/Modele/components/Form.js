@@ -13,6 +13,7 @@ import {
   Select,
   TextField,
 } from "@material-ui/core";
+import { DatePicker } from "@material-ui/pickers";
 import clsx from "clsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -26,8 +27,13 @@ import Button from "@material-ui/core/Button";
 import SnackBar from "../../../components/SnackBar";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { insertUser } from "redux/slices/users";
+import { getAllModeles, insertModele } from "redux/slices/modele";
 import e from "cors";
+import { getAllClients } from "redux/slices/client";
+import { getAllSaisons } from "redux/slices/saison";
+import { getAllPhases } from "redux/slices/phase";
+import { getAllLigneProduits } from "redux/slices/ligneProduit";
+import { getAllFamilles } from "redux/slices/famille";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Form = (props) => {
   const { id } = useParams();
-  const { users } = useSelector((state) => state.users);
-  const user = users.find((user) => user._id === id);
+  const { modeles } = useSelector((state) => state.modeles);
+  const modele = modeles.find((modele) => modele._id === id);
   const { className, edit, ...rest } = props;
   const classes = useStyles();
 
@@ -76,12 +82,14 @@ const Form = (props) => {
     setOpen(false);
   };
   function onSubmit(values) {
+    values.deliveryDate = new Date(values.deliveryDate);
     //CREATE
     if (!id) {
-      dispatch(insertUser(values)).then(() => {
-        history.push("/admins");
+      dispatch(insertModele(values)).then(() => {
+        dispatch(getAllModeles(""));
+        history.push("/contents/modeles");
       });
-      setAlertMessage("admin Created Successfully");
+      setAlertMessage("modele Created Successfully");
       setAlertSeverity("success");
     } else {
       //UPDATE
@@ -101,44 +109,62 @@ const Form = (props) => {
       // }
     }
   }
+  const { clients } = useSelector((state) => state.clients);
+  useEffect(() => {
+    if (clients?.length === 0) {
+      dispatch(getAllClients(""));
+    }
+  }, [dispatch]);
+  const { saisons } = useSelector((state) => state.saisons);
+  useEffect(() => {
+    if (saisons?.length === 0) {
+      dispatch(getAllSaisons(""));
+    }
+  }, [dispatch]);
+  const { phases } = useSelector((state) => state.phases);
+  useEffect(() => {
+    if (phases?.length === 0) {
+      dispatch(getAllPhases(""));
+    }
+  }, [dispatch]);
+  const { ligneProduits } = useSelector((state) => state.ligneProduits);
+  useEffect(() => {
+    if (ligneProduits?.length === 0) {
+      dispatch(getAllLigneProduits(""));
+    }
+  }, [dispatch]);
+  const { familles } = useSelector((state) => state.familles);
+  useEffect(() => {
+    if (familles?.length === 0) {
+      dispatch(getAllFamilles(""));
+    }
+  }, [dispatch]);
   const formik = useFormik({
     initialValues: {
-      name: id ? user?.name : "",
-      email: id ? user?.email : "",
-      password: "",
-      passwordConfirm: "",
+      refArticle: id ? modele?.refArticle : "",
+      client: id ? modele?.client._id : "",
+      saison: id ? modele?.saison._id : "",
+      famille: id ? modele?.famille._id : "",
+      phase: id ? modele?.phase._id : "",
+      ligneProduit: id ? modele?.ligneProduit._id : "",
+      colorCode: id ? modele?.colorCode : "",
+      deliveryDate: id ? modele?.deliveryDate : new Date(),
     },
     validationSchema: !id
       ? Yup.object().shape({
-          name: Yup.string().required(),
-          email: Yup.string().required(),
-          password: Yup.string().required(),
-          confirmPassword: Yup.string().required(),
-          roles: Yup.string().required(),
+          refArticle: Yup.string().required(),
+          client: Yup.string().required(),
+          saison: Yup.string().required(),
+          famille: Yup.string().required(),
+          phase: Yup.string().required(),
+          ligneProduit: Yup.string().required(),
+          colorCode: Yup.string().required(),
+          deliveryDate: Yup.date(),
         })
       : "",
-    // onSubmit: (values) => onSubmit(values),
+    onSubmit: (values) => onSubmit(values),
   });
-  const DUMMY_ROLES = [
-    {
-      _id: "62cff7b5e057b01e97b11f2b",
-      label: "supervisor",
-      createdAt: "2022-07-14T11:02:13.771Z",
-      updatedAt: "2022-07-14T11:02:13.771Z",
-    },
-    {
-      _id: "62cff7bfe057b01e97b11f2d",
-      label: "admin",
-      createdAt: "2022-07-14T11:02:23.388Z",
-      updatedAt: "2022-07-14T11:02:23.388Z",
-    },
-    {
-      _id: "62cff7c4e057b01e97b11f2f",
-      label: "worker",
-      createdAt: "2022-07-14T11:02:28.255Z",
-      updatedAt: "2022-07-14T11:02:28.255Z",
-    },
-  ];
+
   return (
     <div>
       <Card {...rest} className={clsx(classes.root, className)}>
@@ -172,98 +198,185 @@ const Form = (props) => {
                   <Grid item md={3} xs={12}>
                     <TextField
                       error={Boolean(
-                        formik.touched.fullName && formik.errors.fullName
+                        formik.touched.refArticle && formik.errors.refArticle
                       )}
                       helperText={
-                        formik.touched.fullName && formik.errors.fullName
+                        formik.touched.refArticle && formik.errors.refArticle
                       }
                       fullWidth
                       autoComplete="tr"
-                      label="Full name"
-                      name="name"
+                      label="ref article"
+                      name="refArticle"
                       variant="outlined"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.fullName}
+                      value={formik.values.refArticle}
                     />
                   </Grid>
 
                   <Grid item md={3} xs={12}>
                     <TextField
                       error={Boolean(
-                        formik.touched.email && formik.errors.email
-                      )}
-                      helperText={formik.touched.email && formik.errors.email}
-                      fullWidth
-                      label="Email Address"
-                      name="email"
-                      variant="outlined"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.email}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={12}>
-                    <TextField
-                      error={Boolean(
-                        formik.touched.password && formik.errors.password
+                        formik.touched.colorCode && formik.errors.colorCode
                       )}
                       helperText={
-                        formik.touched.password && formik.errors.password
+                        formik.touched.colorCode && formik.errors.colorCode
                       }
                       fullWidth
-                      label="password"
-                      name="password"
-                      autoComplete="none"
+                      label="color code"
+                      name="colorCode"
                       variant="outlined"
-                      type="password"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.password}
+                      value={formik.values.colorCode}
                     />
                   </Grid>
-                  <Grid item md={3} xs={12}>
-                    <TextField
-                      error={Boolean(
-                        formik.touched.password && formik.errors.password
-                      )}
-                      helperText={
-                        formik.touched.password && formik.errors.password
-                      }
-                      fullWidth
-                      label="passwordConfirm"
-                      name="passwordConfirm"
-                      autoComplete="none"
-                      variant="outlined"
-                      type="password"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.passwordConfirm}
-                    />
-                  </Grid>
-                </Grid>
 
-                <Grid item md={3} sm={6} xs={12} mt={20}>
-                  <FormControl>
-                    <InputLabel id="role">Role</InputLabel>
-                    <Select
-                      error={Boolean(
-                        formik.touched.roleId && formik.errors.roleId
-                      )}
-                      helperText={formik.touched.roleId && formik.errors.roleId}
-                      labelId="role"
-                      id="role"
-                      name="roles"
-                      value={formik.values.roles}
-                      label="Role"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    >
-                      {DUMMY_ROLES.map((el) => (
-                        <MenuItem value={el._id}>{el.label}</MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                  <Grid item md={2} xs={10}>
+                    <FormControl>
+                      <InputLabel id="client">Client</InputLabel>
+                      <Select
+                        error={Boolean(
+                          formik.touched.client && formik.errors.client
+                        )}
+                        helperText={
+                          formik.touched.client && formik.errors.client
+                        }
+                        labelId="client"
+                        id="client"
+                        name="client"
+                        value={formik.values.client}
+                        label="Client"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      >
+                        {clients.map((el) => (
+                          <MenuItem value={el._id}>{el.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item md={2} xs={10}>
+                    <FormControl>
+                      <InputLabel id="role">Saison</InputLabel>
+                      <Select
+                        error={Boolean(
+                          formik.touched.saison && formik.errors.saison
+                        )}
+                        helperText={
+                          formik.touched.saison && formik.errors.saison
+                        }
+                        labelId="saison"
+                        id="saison"
+                        name="saison"
+                        value={formik.values.saison}
+                        label="Saison"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      >
+                        {saisons.map((el) => (
+                          <MenuItem value={el._id}>{el.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item md={2} xs={10}>
+                    <FormControl>
+                      <InputLabel id="phase">phase</InputLabel>
+                      <Select
+                        error={Boolean(
+                          formik.touched.phase && formik.errors.phase
+                        )}
+                        helperText={formik.touched.phase && formik.errors.phase}
+                        labelId="phase"
+                        id="phase"
+                        name="phase"
+                        value={formik.values.phase}
+                        label="phase"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      >
+                        {phases.map((el) => (
+                          <MenuItem value={el._id}>{el.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item md={3} xs={10}>
+                    <FormControl>
+                      <InputLabel id="ligneProduit">ligneProduit</InputLabel>
+                      <Select
+                        error={Boolean(
+                          formik.touched.ligneProduit &&
+                            formik.errors.ligneProduit
+                        )}
+                        helperText={
+                          formik.touched.ligneProduit &&
+                          formik.errors.ligneProduit
+                        }
+                        labelId="ligneProduit"
+                        id="ligneProduit"
+                        name="ligneProduit"
+                        value={formik.values.ligneProduit}
+                        label="Role"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      >
+                        {ligneProduits.map((el) => (
+                          <MenuItem value={el._id}>{el.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item md={3} xs={10}>
+                    <FormControl>
+                      <InputLabel id="famille">famille</InputLabel>
+                      <Select
+                        error={Boolean(
+                          formik.touched.famille && formik.errors.famille
+                        )}
+                        helperText={
+                          formik.touched.famille && formik.errors.famille
+                        }
+                        labelId="famille"
+                        id="famille"
+                        name="famille"
+                        value={formik.values.famille}
+                        label="Famille"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      >
+                        {familles.map((el) => (
+                          <MenuItem value={el._id}>{el.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item md={3} xs={10}>
+                    <FormControl>
+                      <InputLabel id="deliveryDate">Delivery Date</InputLabel>
+                      <input
+                        type="date"
+                        error={Boolean(
+                          formik.touched.deliveryDate &&
+                            formik.errors.deliveryDate
+                        )}
+                        helperText={
+                          formik.touched.deliveryDate &&
+                          formik.errors.deliveryDate
+                        }
+                        labelId="deliveryDate"
+                        id="deliveryDate"
+                        name="deliveryDate"
+                        value={formik.values.deliveryDate}
+                        label="DeliveryDate"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                    </FormControl>
+                  </Grid>
                 </Grid>
               </CardContent>
               <Divider />

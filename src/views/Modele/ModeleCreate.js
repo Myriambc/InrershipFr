@@ -19,7 +19,11 @@ const UserCreate = (props) => {
 
   return (
     <div className={classes.root}>
-      <SimpleToolbar Link={Link} pageLink={"/modeles"} title={"Create Model"} />
+      <SimpleToolbar
+        Link={Link}
+        pageLink={"/contents/modeles"}
+        title={"Create Modele"}
+      />
       <div className={classes.content}>
         <Form edit={false} />
       </div>
