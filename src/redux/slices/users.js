@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createOne, getData, getOne, updateOne } from "../../services/api";
+import {
+  createOne,
+  deleteOne,
+  getData,
+  getOne,
+  updateOne,
+} from "../../services/api";
 
 export const getAllUsers = createAsyncThunk(
   "users/getUsers",
@@ -14,7 +20,7 @@ export const getAllUsers = createAsyncThunk(
 );
 // update user
 export const updateOneUser = createAsyncThunk(
-  "saison/updateUser",
+  "user/updateUser",
   async (data, { rejectWithValue, thunkAPI }) => {
     const { id, ...user } = data;
     try {
@@ -44,6 +50,19 @@ export const insertUser = createAsyncThunk(
     try {
       const { data } = await createOne("users", userData);
       return data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+// delete user
+export const deleteOneUser = createAsyncThunk(
+  "users/deletUser",
+  async (id, { rejectWithValue }) => {
+    try {
+      await deleteOne("users", id);
+      return id;
     } catch (error) {
       return rejectWithValue(error.response);
     }
@@ -98,6 +117,17 @@ const usersSlice = createSlice({
       state.isCreated = "success";
     },
     [insertUser.rejected]: (state, { payload }) => {
+      state.error = payload;
+      state.loading = "failed";
+    },
+
+    // delete users
+    [deleteOneUser.fulfilled]: (state, { payload }) => {
+      state.loading = "success";
+      const users = state.users.filter((el) => el._id != payload);
+      state.users = users;
+    },
+    [deleteOneUser.rejected]: (state, { payload }) => {
       state.error = payload;
       state.loading = "failed";
     },

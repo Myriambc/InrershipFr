@@ -28,7 +28,7 @@ import Button from "@material-ui/core/Button";
 import SnackBar from "../../../components/SnackBar";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { insertUser, updateOneUser } from "redux/slices/users";
+import { getAllUsers, insertUser, updateOneUser } from "redux/slices/users";
 import e from "cors";
 import validateObj from "helpers/validateObj";
 
@@ -101,10 +101,10 @@ const Form = (props) => {
             email: validValues.email,
           })
         ).then(() => {
-          dispatch();
-          history.push("/contents/admins");
+          dispatch(getAllUsers(""));
+          history.push("/admins");
         });
-        setAlertMessage("Lesson Updated Successfully");
+        setAlertMessage("admin Updated Successfully");
         setAlertSeverity("success");
       }
     }
@@ -124,7 +124,10 @@ const Form = (props) => {
           confirmPassword: Yup.string().required(),
           roles: Yup.string().required(),
         })
-      : "",
+      : Yup.object().shape({
+          name: Yup.string(),
+          email: Yup.string(),
+        }),
     // onSubmit: (values) => onSubmit(values),
   });
   const DUMMY_ROLES = [
@@ -179,12 +182,8 @@ const Form = (props) => {
                 <Grid container spacing={3}>
                   <Grid item md={3} xs={12}>
                     <TextField
-                      error={Boolean(
-                        formik.touched.fullName && formik.errors.fullName
-                      )}
-                      helperText={
-                        formik.touched.fullName && formik.errors.fullName
-                      }
+                      error={Boolean(formik.touched.name && formik.errors.name)}
+                      helperText={formik.touched.name && formik.errors.name}
                       fullWidth
                       autoComplete="tr"
                       label="Full name"
@@ -192,7 +191,7 @@ const Form = (props) => {
                       variant="outlined"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.fullName}
+                      value={formik.values.name}
                     />
                   </Grid>
 
@@ -211,68 +210,77 @@ const Form = (props) => {
                       value={formik.values.email}
                     />
                   </Grid>
-                  <Grid item md={3} xs={12}>
-                    <TextField
-                      error={Boolean(
-                        formik.touched.password && formik.errors.password
-                      )}
-                      helperText={
-                        formik.touched.password && formik.errors.password
-                      }
-                      fullWidth
-                      label="password"
-                      name="password"
-                      autoComplete="none"
-                      variant="outlined"
-                      type="password"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.password}
-                    />
-                  </Grid>
-                  <Grid item md={3} xs={12}>
-                    <TextField
-                      error={Boolean(
-                        formik.touched.password && formik.errors.password
-                      )}
-                      helperText={
-                        formik.touched.password && formik.errors.password
-                      }
-                      fullWidth
-                      label="passwordConfirm"
-                      name="passwordConfirm"
-                      autoComplete="none"
-                      variant="outlined"
-                      type="password"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.passwordConfirm}
-                    />
-                  </Grid>
+
+                  {!id && (
+                    <Grid item md={3} xs={12}>
+                      <TextField
+                        error={Boolean(
+                          formik.touched.password && formik.errors.password
+                        )}
+                        helperText={
+                          formik.touched.password && formik.errors.password
+                        }
+                        fullWidth
+                        label="password"
+                        name="password"
+                        autoComplete="none"
+                        variant="outlined"
+                        type="password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                      />
+                    </Grid>
+                  )}
+                  {!id && (
+                    <Grid item md={3} xs={12}>
+                      <TextField
+                        error={Boolean(
+                          formik.touched.password && formik.errors.password
+                        )}
+                        helperText={
+                          formik.touched.password && formik.errors.password
+                        }
+                        fullWidth
+                        label="passwordConfirm"
+                        name="passwordConfirm"
+                        autoComplete="none"
+                        variant="outlined"
+                        type="password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.passwordConfirm}
+                      />
+                    </Grid>
+                  )}
                 </Grid>
 
-                <Grid item md={3} sm={6} xs={12} mt={20}>
-                  <FormControl>
-                    <InputLabel id="role">Role</InputLabel>
-                    <Select
-                      error={Boolean(
-                        formik.touched.roleId && formik.errors.roleId
-                      )}
-                      helperText={formik.touched.roleId && formik.errors.roleId}
-                      labelId="role"
-                      id="role"
-                      name="roles"
-                      value={formik.values.roles}
-                      label="Role"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    >
-                      {DUMMY_ROLES.map((el) => (
-                        <MenuItem value={el._id}>{el.label}</MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
+                {!id && (
+                  <Grid item md={3} sm={6} xs={12} mt={20}>
+                    <FormControl>
+                      <InputLabel id="role">Role</InputLabel>
+                      <Select
+                        error={Boolean(
+                          formik.touched.roleId && formik.errors.roleId
+                        )}
+                        helperText={
+                          formik.touched.roleId && formik.errors.roleId
+                        }
+                        labelId="role"
+                        id="role"
+                        name="roles"
+                        value={formik.values.roles}
+                        label="Role"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      >
+                        {DUMMY_ROLES.map((el) => (
+                          <MenuItem value={el._id}>{el.label}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                )}
               </CardContent>
               <Divider />
               <CardActions>

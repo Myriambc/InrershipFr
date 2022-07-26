@@ -5,7 +5,7 @@ import Table from "../../components/Table/Table";
 import Collapse from "@material-ui/core/Collapse";
 import Columns from "../../components/Columns";
 import Filter from "../../components/Filter/Filter";
-import { getAllUsers } from "../../redux/slices/users";
+import { deleteOneUser, getAllUsers } from "../../redux/slices/users";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -141,6 +141,7 @@ const UserList = () => {
           />
         </Collapse>
         <Table
+          deleteItem={deleteOneUser}
           loading={loading}
           columns={columns}
           data={users}

@@ -184,7 +184,7 @@ const CustomTable = (props) => {
     return chipType(col, v);
   };
   const imageType = (col, value) => {
-    return <img src={`http://localhost:8000/${value}`} />;
+    return <img src={`127.0.0.1:8000/${value}`} />;
   };
   const simpleListType = (col, value) => {
     return (
