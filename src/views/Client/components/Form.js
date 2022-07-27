@@ -107,6 +107,7 @@ const Form = (props) => {
         <Formik
           initialValues={{
             label: id ? client?.label : "",
+            logo: id ? client?.logo : "",
           }}
           validationSchema={id ? validationOnUpdate : validationOnCreate}
           onSubmit={onSubmit}
@@ -138,6 +139,18 @@ const Form = (props) => {
                       value={values.label}
                       variant="outlined"
                       label="label"
+                    />
+                  </Grid>
+                  <Grid item md={6} sm={6} xs={12}>
+                    <TextField
+                      fullWidth
+                      name="logo"
+                      onBlur={handleBlur}
+                      onChange={(e) => {
+                        setFieldValue("logo", e.target.files[0]);
+                      }}
+                      type="file"
+                      variant="outlined"
                     />
                   </Grid>
                 </Grid>

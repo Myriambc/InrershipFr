@@ -27,6 +27,7 @@ const columnsList = [
     sortable: false,
   },
   { accessor: "label", label: "Label", width: "20%", show: true },
+  { accessor: "logo", label: "Logo", width: "20%", show: true, type: "image" },
   {
     accessor: "createdAt",
     name: "createdAt",

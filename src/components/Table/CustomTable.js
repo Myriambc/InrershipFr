@@ -184,7 +184,13 @@ const CustomTable = (props) => {
     return chipType(col, v);
   };
   const imageType = (col, value) => {
-    return <img src={`127.0.0.1:8000/${value}`} />;
+    if (value !== "NA")
+      return (
+        <a href={value} target="_blank">
+          <img src={value} style={{ width: "100px" }} />
+        </a>
+      );
+    return null;
   };
   const simpleListType = (col, value) => {
     return (

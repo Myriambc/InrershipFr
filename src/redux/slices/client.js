@@ -20,7 +20,11 @@ export const updateOneClient = createAsyncThunk(
   async (data, { rejectWithValue, thunkAPI }) => {
     const { id, ...client } = data;
     try {
-      const { data } = await updateOne("clients", id, client);
+      const { data } = await updateOne(
+        "clients",
+        id,
+        serialize(client, { indices: true })
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -32,7 +36,10 @@ export const insertClient = createAsyncThunk(
   "clients/insertClient",
   async (client, { rejectWithValue }) => {
     try {
-      const { data } = await createOne("clients", client);
+      const { data } = await createOne(
+        "clients",
+        serialize(client, { indices: true })
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.response);
